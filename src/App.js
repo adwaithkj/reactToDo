@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-
+import AddForm from "./components/addForm";
 function App() {
   // let tasks = ["clean toilet", "clean sewer", "clean the code"];
 
@@ -31,6 +31,10 @@ function App() {
     updateTasks(tasks.filter((item) => item !== task));
   }
 
+  fetch("https://jsonplaceholder.typicode.com/todos/1")
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+
   return (
     <div className="App">
       <header className="App-header">
@@ -47,28 +51,32 @@ function App() {
         noValidate
         autoComplete="off"
       >
+        <AddForm />
+
         <div style={{ display: "flex", alignItems: "center" }}>
-          <TextField
-            fullWidth
-            id="taskAdd"
-            required
-            placeholder="Add task"
-            value={text}
-            onChange={(ev) => {
-              onTextChange(ev);
-            }}
-            onKeyPress={(e) => e.key === "Enter" && handleAdd(e)}
-          />
-          <Button
-            variant="contained"
-            onClick={(ev) =>
-              text !== ""
-                ? handleAdd(ev)
-                : alert("Text field must not be empty")
-            }
-          >
-            Add
-          </Button>
+          <form className="addForm">
+            <TextField
+              fullWidth
+              id="taskAdd"
+              required
+              placeholder="Add task"
+              value={text}
+              onChange={(ev) => {
+                onTextChange(ev);
+              }}
+              onKeyPress={(e) => e.key === "Enter" && handleAdd(e)}
+            />
+            <Button
+              variant="contained"
+              onClick={(ev) =>
+                text !== ""
+                  ? handleAdd(ev)
+                  : alert("Text field must not be empty")
+              }
+            >
+              Add
+            </Button>
+          </form>
         </div>
       </Box>
       {tasks !== [] ? (

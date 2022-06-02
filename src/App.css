@@ -32,6 +32,11 @@ body{
 
 }
 
+.addForm{
+  display:flex;
+  align-items: center;
+}
+
 .Todo-heading{
   display: flex;
   padding-top: 0px;

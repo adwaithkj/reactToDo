@@ -40,7 +40,7 @@ export default function ListItem(props) {
           <FormGroup>
             <FormControlLabel
               control={<Checkbox />}
-              label="Label"
+              label="Mark as completed"
               onChange={(ev) => handleCheckBox(ev)}
             />
           </FormGroup>
