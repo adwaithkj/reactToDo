@@ -31,9 +31,9 @@ function App() {
     updateTasks(tasks.filter((item) => item !== task));
   }
 
-  fetch("https://jsonplaceholder.typicode.com/todos/1")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  // fetch("https://jsonplaceholder.typicode.com/todos/1")
+  //   .then((response) => response.json())
+  //   .then((json) => console.log(json));
 
   return (
     <div className="App">
@@ -49,11 +49,15 @@ function App() {
           "& .MuiTextField-root": { m: 1, width: "100ch" },
         }}
         noValidate
-        autoComplete="off"
+        autoComplete="on"
       >
-        <AddForm />
+        <AddForm
+          text={text}
+          onTextChange={onTextChange}
+          handleAdd={handleAdd}
+        />
 
-        <div style={{ display: "flex", alignItems: "center" }}>
+        {/* <div style={{ display: "flex", alignItems: "center" }}>
           <form className="addForm">
             <TextField
               fullWidth
@@ -64,7 +68,12 @@ function App() {
               onChange={(ev) => {
                 onTextChange(ev);
               }}
-              onKeyPress={(e) => e.key === "Enter" && handleAdd(e)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter")
+                  text !== ""
+                    ? handleAdd(e)
+                    : alert("Text field must not be empty");
+              }}
             />
             <Button
               variant="contained"
@@ -77,7 +86,7 @@ function App() {
               Add
             </Button>
           </form>
-        </div>
+        </div> */}
       </Box>
       {tasks !== [] ? (
         <div className="li">
@@ -86,7 +95,7 @@ function App() {
           ))}
         </div>
       ) : (
-        <div></div>
+        <h1>Click add to add new task</h1>
       )}
     </div>
   );
