@@ -18,6 +18,8 @@ export default function ListItem(props) {
     setFinish(~finished);
   }
 
+  let handleEdit = props.handleEdit;
+
   let handleDelete = props.handleDelete;
   const styles = {
     padding: "10px",
@@ -47,7 +49,7 @@ export default function ListItem(props) {
         </CardContent>
 
         <CardActions>
-          <Button size="small" onClick={() => setFinish(true)}>
+          <Button size="small" onClick={(ev) => handleEdit(task)}>
             Edit
           </Button>
 
@@ -58,13 +60,6 @@ export default function ListItem(props) {
           >
             Discard
           </Button>
-          {/* <Button
-          variant="outlined"
-          size="small"
-          onClick={() => console.log("click on something else:")}
-        >
-          something else
-        </Button> */}
         </CardActions>
       </Card>
     </div>

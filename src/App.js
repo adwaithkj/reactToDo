@@ -31,6 +31,17 @@ function App() {
     updateTasks(tasks.filter((item) => item !== task));
   }
 
+  function handleEdit(task) {
+    if (text == "") {
+      alert("enter something to edit the value with");
+      return;
+    }
+    let newTask = [...tasks];
+    let index = newTask.indexOf(task);
+    newTask[index] = text;
+
+    updateTasks(newTask);
+  }
   // fetch("https://jsonplaceholder.typicode.com/todos/1")
   //   .then((response) => response.json())
   //   .then((json) => console.log(json));
@@ -55,6 +66,7 @@ function App() {
           text={text}
           onTextChange={onTextChange}
           handleAdd={handleAdd}
+          handleEdit={handleEdit}
         />
 
         {/* <div style={{ display: "flex", alignItems: "center" }}>
@@ -91,7 +103,12 @@ function App() {
       {tasks !== [] ? (
         <div className="li">
           {tasks.map((task) => (
-            <ListItem key={task} task={task} handleDelete={handleDelete} />
+            <ListItem
+              key={task}
+              task={task}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+            />
           ))}
         </div>
       ) : (
