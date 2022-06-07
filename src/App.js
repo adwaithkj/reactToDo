@@ -9,6 +9,7 @@ import AddForm from "./components/addForm";
 function App() {
   // let tasks = ["clean toilet", "clean sewer", "clean the code"];
 
+  // const [tasks, updateTasks] = useState(localStorage.getItem("tasks") === []);
   const [tasks, updateTasks] = useState([]);
   // const [tasks, updateTasks] = useState(
   //   taskName: "";
@@ -17,7 +18,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("tasks", tasks);
-  });
+  }, [tasks]);
   const [text, setText] = useState("");
 
   const handleCheck = (task) => {
