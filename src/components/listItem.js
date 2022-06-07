@@ -4,19 +4,20 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
 export default function ListItem(props) {
   // console.log(length);
-  const [finished, setFinish] = useState(false);
+  // const [finished, setFinish] = useState(false);
 
-  function handleCheckBox(ev) {
-    console.log(ev);
-    setFinish(~finished);
-  }
+  // function handleCheckBox(ev) {
+  //   console.log(ev);
+  //   setFinish(~finished);
+  // }
+  let handleCheckBox = props.handleCheck;
 
   let handleEdit = props.handleEdit;
 
@@ -37,19 +38,22 @@ export default function ListItem(props) {
             sx={{ mb: 1.5, textAlign: "left" }}
             color="text.secondary"
           >
-            status: {finished ? "completed" : "not completed"}
+            status: {props.check ? "completed" : "not completed"}
           </Typography>
           <FormGroup>
             <FormControlLabel
               control={<Checkbox />}
               label="Mark as completed"
-              onChange={(ev) => handleCheckBox(ev)}
+              onChange={(ev) => handleCheckBox(task)}
             />
           </FormGroup>
         </CardContent>
 
         <CardActions>
-          <Button size="small" onClick={(ev) => handleEdit(task)}>
+          <Button
+            size="small"
+            onClick={(ev) => handleEdit([task, props.check])}
+          >
             Edit
           </Button>
 

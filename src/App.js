@@ -1,16 +1,37 @@
 import logo from "./logo.svg";
 import "./App.css";
 import ListItem from "./components/listItem";
-import Button from "@mui/material/Button";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+
 import AddForm from "./components/addForm";
 function App() {
   // let tasks = ["clean toilet", "clean sewer", "clean the code"];
 
   const [tasks, updateTasks] = useState([]);
+  // const [tasks, updateTasks] = useState(
+  //   taskName: "";
+  //   check: false;
+  // );
+
+  useEffect(() => {
+    localStorage.setItem("tasks", tasks);
+  });
   const [text, setText] = useState("");
+
+  const handleCheck = (task) => {
+    console.log("something is happening", task);
+    let newItem = [...tasks];
+
+    for (let i = 0; i < task.length; i++) {
+      if (newItem[i][0] === task) newItem[i][1] = ~newItem[i][1];
+      console.log("updated");
+      updateTasks(newItem);
+      break;
+    }
+    console.log(tasks);
+  };
 
   const onTextChange = (ev) => {
     setText(ev.target.value);
@@ -20,25 +41,31 @@ function App() {
   function handleAdd(event) {
     console.log(event.target.value);
 
-    updateTasks([...tasks, text]);
-    setText("");
+    updateTasks([...tasks, [text, false]]);
     console.log(tasks);
+    setText("");
   }
 
   function handleDelete(task) {
-    console.log(task);
-    console.log(tasks);
-    updateTasks(tasks.filter((item) => item !== task));
+    updateTasks(tasks.filter((item) => item[0] !== task));
   }
 
   function handleEdit(task) {
-    if (text == "") {
+    console.log(task);
+    if (text === "") {
       alert("enter something to edit the value with");
       return;
     }
     let newTask = [...tasks];
-    let index = newTask.indexOf(task);
-    newTask[index] = text;
+    console.log(newTask);
+    let i = 0;
+    let index;
+
+    for (i = 0; i < newTask.length; i++) {
+      if (newTask[i][0] === task[0]) index = i;
+    }
+    console.log(index);
+    newTask[index] = [text, false];
 
     updateTasks(newTask);
   }
@@ -66,48 +93,18 @@ function App() {
           text={text}
           onTextChange={onTextChange}
           handleAdd={handleAdd}
-          handleEdit={handleEdit}
         />
-
-        {/* <div style={{ display: "flex", alignItems: "center" }}>
-          <form className="addForm">
-            <TextField
-              fullWidth
-              id="taskAdd"
-              required
-              placeholder="Add task"
-              value={text}
-              onChange={(ev) => {
-                onTextChange(ev);
-              }}
-              onKeyPress={(e) => {
-                if (e.key === "Enter")
-                  text !== ""
-                    ? handleAdd(e)
-                    : alert("Text field must not be empty");
-              }}
-            />
-            <Button
-              variant="contained"
-              onClick={(ev) =>
-                text !== ""
-                  ? handleAdd(ev)
-                  : alert("Text field must not be empty")
-              }
-            >
-              Add
-            </Button>
-          </form>
-        </div> */}
       </Box>
-      {tasks !== [] ? (
+      {tasks !== undefined ? (
         <div className="li">
           {tasks.map((task) => (
             <ListItem
-              key={task}
-              task={task}
+              key={task[0]}
+              task={task[0]}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              handleCheck={handleCheck}
+              check={task[1]}
             />
           ))}
         </div>
