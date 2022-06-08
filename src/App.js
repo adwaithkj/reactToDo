@@ -22,12 +22,14 @@ function App() {
   const [text, setText] = useState("");
 
   const handleCheck = (task) => {
-    console.log("something is happening", task);
     let newItem = [...tasks];
 
     for (let i = 0; i < task.length; i++) {
-      if (newItem[i][0] === task) newItem[i][1] = ~newItem[i][1];
+      if (newItem[i].taskName === task)
+        if (newItem[i].status === false) newItem[i].status = true;
+        else newItem[i].status = false;
       console.log("updated");
+      console.log(newItem);
       updateTasks(newItem);
       break;
     }
@@ -42,17 +44,17 @@ function App() {
   function handleAdd(event) {
     console.log(event.target.value);
 
-    updateTasks([...tasks, [text, false]]);
+    // updateTasks([...tasks, [text, false]]);
+    updateTasks([...tasks, { taskName: text, status: false }]);
     console.log(tasks);
     setText("");
   }
 
   function handleDelete(task) {
-    updateTasks(tasks.filter((item) => item[0] !== task));
+    updateTasks(tasks.filter((item) => item.taskName !== task));
   }
 
   function handleEdit(task) {
-    console.log(task);
     if (text === "") {
       alert("enter something to edit the value with");
       return;
@@ -63,10 +65,14 @@ function App() {
     let index;
 
     for (i = 0; i < newTask.length; i++) {
-      if (newTask[i][0] === task[0]) index = i;
+      if (newTask[i].taskName === task) {
+        console.log("found");
+        index = i;
+      }
     }
     console.log(index);
-    newTask[index] = [text, false];
+    // newTask[index] = [text, false];
+    newTask[index] = { taskName: text, status: false };
 
     updateTasks(newTask);
   }
@@ -101,11 +107,11 @@ function App() {
           {tasks.map((task) => (
             <ListItem
               key={task[0]}
-              task={task[0]}
+              task={task.taskName}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
               handleCheck={handleCheck}
-              check={task[1]}
+              check={task.status}
             />
           ))}
         </div>

@@ -50,10 +50,7 @@ export default function ListItem(props) {
         </CardContent>
 
         <CardActions>
-          <Button
-            size="small"
-            onClick={(ev) => handleEdit([task, props.check])}
-          >
+          <Button size="small" onClick={(ev) => handleEdit(task)}>
             Edit
           </Button>
 
