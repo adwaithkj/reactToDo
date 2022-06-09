@@ -10,12 +10,26 @@ export default function addForm(props) {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "100ch" },
+        "& .MuiTextField-root": {
+          m: 1,
+          // minWidth: "30ch",
+          // width: "",
+        },
       }}
+      // sx={{
+      //   "& .MuiTextField-root": { m: 1, width: "10ch" },
+      // }}
       noValidate
       autoComplete="on"
     >
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          alignItems: "center",
+          overflow: "scroll",
+        }}
+      >
         <form className="addForm">
           <TextField
             fullWidth

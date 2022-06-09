@@ -10,14 +10,23 @@ function App() {
   // let tasks = ["clean toilet", "clean sewer", "clean the code"];
 
   // const [tasks, updateTasks] = useState(localStorage.getItem("tasks") === []);
-  const [tasks, updateTasks] = useState([]);
+  let p;
+  if (localStorage.getItem("tasks") !== undefined) {
+    console.log(localStorage.getItem("tasks"));
+    p = JSON.parse(localStorage.getItem("tasks"));
+  } else {
+    p = [];
+  }
+
+  // const [tasks, updateTasks] = useState(p);
+  const [tasks, updateTasks] = useState(p);
   // const [tasks, updateTasks] = useState(
   //   taskName: "";
   //   check: false;
   // );
 
   useEffect(() => {
-    localStorage.setItem("tasks", tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
   const [text, setText] = useState("");
 
@@ -83,11 +92,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <div className="Applogo">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
 
-        <h1 className="header"> React </h1>
+        <div className="Todo-heading">
+          <h2>TODO App</h2>
+        </div>
       </header>
-      <h2 className="Todo-heading">Todo App</h2>
       <Box
         component="form"
         sx={{
@@ -96,11 +108,14 @@ function App() {
         noValidate
         autoComplete="on"
       >
-        <AddForm
-          text={text}
-          onTextChange={onTextChange}
-          handleAdd={handleAdd}
-        />
+        <hr></hr>
+        <div className="form">
+          <AddForm
+            text={text}
+            onTextChange={onTextChange}
+            handleAdd={handleAdd}
+          />
+        </div>
       </Box>
       {tasks !== undefined ? (
         <div className="li">
