@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import AddForm from "./components/addForm";
 import MadeWithLove from "./components/madeWithLove";
 
+import Counter from "./features/counter/Counter";
+
 function App() {
   // let tasks = ["clean toilet", "clean sewer", "clean the code"];
 
@@ -127,6 +129,7 @@ function App() {
           />
         </div>
       </Box>
+      <Counter />
       {!ifEmpty ? (
         <div className="li">
           {tasks.map((task) => (
@@ -143,6 +146,7 @@ function App() {
       ) : (
         <h1>Click add to add new task</h1>
       )}
+
       <div className="footer">
         <MadeWithLove />
       </div>
