@@ -27,7 +27,6 @@ export default function addForm(props) {
           display: "flex",
           width: "100%",
           alignItems: "center",
-          overflow: "scroll",
         }}
       >
         <form className="addForm">

@@ -70,9 +70,7 @@ h1.header {
   width: 100vw;
 
 }
-addForm{
-  width: 100px;
-}
+
 .li{
   padding:10px;
  
@@ -80,6 +78,14 @@ addForm{
   flex-wrap:wrap;
 
 
+}
+
+.footer{
+  position: absolute;
+  display: flex;
+  bottom: 20px;
+ width: 200px;
+ right: 0;
 }
 
 .addForm{

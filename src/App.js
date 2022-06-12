@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 
 import AddForm from "./components/addForm";
+import MadeWithLove from "./components/madeWithLove";
+
 function App() {
   // let tasks = ["clean toilet", "clean sewer", "clean the code"];
 
@@ -24,10 +26,18 @@ function App() {
   //   taskName: "";
   //   check: false;
   // );
+  let ifEmpty = false;
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    if (tasks === []) {
+      ifEmpty = true;
+    } else {
+      ifEmpty = false;
+    }
   }, [tasks]);
+
   const [text, setText] = useState("");
 
   const handleCheck = (task) => {
@@ -117,7 +127,7 @@ function App() {
           />
         </div>
       </Box>
-      {tasks !== undefined ? (
+      {!ifEmpty ? (
         <div className="li">
           {tasks.map((task) => (
             <ListItem
@@ -133,6 +143,9 @@ function App() {
       ) : (
         <h1>Click add to add new task</h1>
       )}
+      <div className="footer">
+        <MadeWithLove />
+      </div>
     </div>
   );
 }
