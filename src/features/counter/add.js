@@ -5,7 +5,9 @@ import { handleAdd } from "../features/counter/counterSlice";
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 
-export default function AddForm(props) {
+export default function addForm(props) {
+  const count = useSelector((state) => state.counter.value);
+
   const dispatch = useDispatch();
 
   let text = props.text;

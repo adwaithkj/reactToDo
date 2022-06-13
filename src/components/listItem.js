@@ -8,21 +8,17 @@ import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-// import Switch from "@mui/material/Switch";
+
+import { useSelector, useDispatch } from "react-redux";
+import {
+  handleCheck,
+  handleEdit,
+  handleDelete,
+} from "../features/counter/counterSlice";
 
 export default function ListItem(props) {
-  // console.log(length);
-  // const [finished, setFinish] = useState(false);
-
-  // function handleCheckBox(ev) {
-  //   console.log(ev);
-  //   setFinish(~finished);
-  // }
-  let handleCheckBox = props.handleCheck;
-
-  let handleEdit = props.handleEdit;
-
-  let handleDelete = props.handleDelete;
+  const tasks = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
   const styles = {
     padding: "10px",
   };
@@ -45,7 +41,7 @@ export default function ListItem(props) {
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox />}
-                onChange={(ev) => handleCheckBox(task)}
+                onChange={(ev) => dispatch(handleCheck())}
               />
             </FormGroup>
             <div
@@ -65,14 +61,14 @@ export default function ListItem(props) {
         </CardContent>
 
         <CardActions>
-          <Button size="small" onClick={(ev) => handleEdit(task)}>
+          <Button size="small" onClick={(ev) => dispatch(handleEdit())}>
             Edit
           </Button>
 
           <Button
             variant="outlined"
             size="small"
-            onClick={(ev) => handleDelete(task)}
+            onClick={(ev) => dispatch(handleDelete())}
           >
             Discard
           </Button>

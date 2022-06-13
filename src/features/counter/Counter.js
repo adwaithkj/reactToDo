@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "./counterSlice";
+import { decrement, increment, addTask } from "./counterSlice";
 // import styles from "./Counter.module.css";
 
 export default function Counter() {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
-
+  console.log(count);
   return (
     <div>
       <div>
@@ -22,6 +22,9 @@ export default function Counter() {
           onClick={() => dispatch(decrement())}
         >
           Decrement
+        </button>
+        <button aria-label="Add Task" onClick={(ev) => dispatch(addTask(ev))}>
+          AddTask
         </button>
       </div>
     </div>
