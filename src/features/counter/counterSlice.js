@@ -37,12 +37,19 @@ export const counterSlice = createSlice({
       state.value = newVal;
     },
     handleDelete: (state, action) => {
+      console.log("delete initiated");
       state.value = state.value.filter(
         (item) => item.taskName !== action.payload
       );
+      // let newVal=[...state.value];
+
+      // for (let i=0;i<state.value.length; i++){
+      //   if (item.taskName)
+      // }
+
+      console.log(state.value);
     },
     handleAdd: (state, action) => {
-      console.log("handle add called");
       state.value = [
         ...state.value,
         { taskName: action.payload, status: false },

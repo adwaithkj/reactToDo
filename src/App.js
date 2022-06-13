@@ -72,7 +72,7 @@ function App() {
       </Box>
       {/* <Counter /> */}
 
-      <h1>{useSelector((state) => state.counter.value.taskName)}</h1>
+      {/* <h1>{useSelector((state) => state.counter.value.taskName)}</h1> */}
       {!isEmpty ? (
         <div className="li">
           {tasks.map((task) => (

@@ -68,7 +68,7 @@ export default function ListItem(props) {
           <Button
             variant="outlined"
             size="small"
-            onClick={(ev) => dispatch(handleDelete())}
+            onClick={(ev) => dispatch(handleDelete(task))}
           >
             Discard
           </Button>
