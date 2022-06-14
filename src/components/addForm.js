@@ -10,8 +10,13 @@ export default function AddForm(props) {
 
   let text = props.text;
   let onTextChange = props.onTextChange;
+  let textReset = props.textReset;
 
   // const count = useSelector((state) => state.counter.value));
+  const callAdd = () => {
+    dispatch(handleAdd(text));
+    textReset();
+  };
 
   return (
     <Box
@@ -43,17 +48,13 @@ export default function AddForm(props) {
             }}
             onKeyPress={(e) => {
               if (e.key === "Enter")
-                text !== ""
-                  ? dispatch(handleAdd(text))
-                  : alert("Text field must not be empty");
+                text !== "" ? callAdd() : alert("Text field must not be empty");
             }}
           />
           <Button
             variant="contained"
             onClick={(ev) =>
-              text !== ""
-                ? dispatch(handleAdd(text))
-                : alert("Text field must not be empty")
+              text !== "" ? callAdd() : alert("Text field must not be empty")
             }
           >
             Add

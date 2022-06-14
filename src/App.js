@@ -44,6 +44,10 @@ function App() {
     setText(ev.target.value);
     console.log(text);
   };
+
+  const textReset = () => {
+    setText("");
+  };
   console.log(tasks);
 
   return (
@@ -67,7 +71,11 @@ function App() {
       >
         <hr></hr>
         <div className="form">
-          <AddForm text={text} onTextChange={onTextChange} />
+          <AddForm
+            text={text}
+            onTextChange={onTextChange}
+            textReset={textReset}
+          />
         </div>
       </Box>
       {/* <Counter /> */}
@@ -80,6 +88,7 @@ function App() {
               // key={task.taskName}
               task={task.taskName}
               check={task.status}
+              text={text}
             />
           ))}
         </div>

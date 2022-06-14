@@ -23,6 +23,7 @@ export default function ListItem(props) {
     padding: "10px",
   };
   let task = props.task;
+  let text = props.text;
 
   return (
     <div style={styles}>
@@ -61,7 +62,10 @@ export default function ListItem(props) {
         </CardContent>
 
         <CardActions>
-          <Button size="small" onClick={(ev) => dispatch(handleEdit())}>
+          <Button
+            size="small"
+            onClick={(ev) => dispatch(handleEdit([task, text]))}
+          >
             Edit
           </Button>
 

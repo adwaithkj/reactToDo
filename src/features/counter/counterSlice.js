@@ -13,18 +13,7 @@ export const counterSlice = createSlice({
       // immutable state based off those changes
       state.value += 1;
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
 
-    addTask: (state, action) => {
-      // let newVal=[...state.value, action.payload];
-      let newVal = [...state.value, 1];
-      state.value = newVal;
-    },
     handleCheck: (state, action) => {
       let newVal = [...state.value];
 
@@ -41,11 +30,6 @@ export const counterSlice = createSlice({
       state.value = state.value.filter(
         (item) => item.taskName !== action.payload
       );
-      // let newVal=[...state.value];
-
-      // for (let i=0;i<state.value.length; i++){
-      //   if (item.taskName)
-      // }
 
       console.log(state.value);
     },
@@ -58,7 +42,7 @@ export const counterSlice = createSlice({
       console.log(state.value);
     },
     handleEdit: (state, action) => {
-      if (action.payload === "") {
+      if (action.payload[1] === "") {
         alert("Enter something to edit the value with");
         return;
       }
@@ -68,11 +52,13 @@ export const counterSlice = createSlice({
       let index;
 
       for (i = 0; i < newTask.length; i++) {
-        if (newTask[i].taskName === action.payload) {
+        if (newTask[i].taskName === action.payload[0]) {
           index = i;
         }
       }
-      newTask[index] = { taskName: action.payload };
+      newTask[index] = { taskName: action.payload[1] };
+
+      state.value = newTask;
     },
   },
 });
