@@ -8,25 +8,9 @@ import Box from "@mui/material/Box";
 import AddForm from "./components/addForm";
 import MadeWithLove from "./components/madeWithLove";
 
-import Counter from "./features/counter/Counter";
-
 import { useSelector, useDispatch } from "react-redux";
-import { handleAdd } from "./features/counter/counterSlice";
 
 function App() {
-  // let tasks = ["clean toilet", "clean sewer", "clean the code"];
-
-  // const [tasks, updateTasks] = useState(localStorage.getItem("tasks") === []);
-  // let p;
-  // if (localStorage.getItem("tasks") !== undefined) {
-  //   console.log(localStorage.getItem("tasks"));
-  //   p = JSON.parse(localStorage.getItem("tasks"));
-  // } else {
-  //   p = [];
-  // }
-
-  // const [tasks, updateTasks] = useState(p);
-
   const tasks = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
@@ -78,9 +62,7 @@ function App() {
           />
         </div>
       </Box>
-      {/* <Counter /> */}
 
-      {/* <h1>{useSelector((state) => state.counter.value.taskName)}</h1> */}
       {!isEmpty ? (
         <div className="li">
           {tasks.map((task) => (

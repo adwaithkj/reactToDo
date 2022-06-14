@@ -1,19 +1,17 @@
 import { createSlice, TaskAbortError } from "@reduxjs/toolkit";
 
+console.log("we are inside counterslice.");
+let p;
+if (localStorage.getItem("tasks"))
+  p = JSON.parse(localStorage.getItem("tasks"));
+else p = [];
+
 export const counterSlice = createSlice({
   name: "counter",
   initialState: {
-    value: [],
+    value: p,
   },
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-    },
-
     handleCheck: (state, action) => {
       let newVal = [...state.value];
 
@@ -24,6 +22,7 @@ export const counterSlice = createSlice({
       }
 
       state.value = newVal;
+      localStorage.setItem("tasks", JSON.stringify(state.value));
     },
     handleDelete: (state, action) => {
       console.log("delete initiated");
@@ -31,13 +30,14 @@ export const counterSlice = createSlice({
         (item) => item.taskName !== action.payload
       );
 
-      console.log(state.value);
+      localStorage.setItem("tasks", JSON.stringify(state.value));
     },
     handleAdd: (state, action) => {
       state.value = [
         ...state.value,
         { taskName: action.payload, status: false },
       ];
+      localStorage.setItem("tasks", JSON.stringify(state.value));
 
       console.log(state.value);
     },
@@ -59,20 +59,13 @@ export const counterSlice = createSlice({
       newTask[index] = { taskName: action.payload[1] };
 
       state.value = newTask;
+      localStorage.setItem("tasks", JSON.stringify(state.value));
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  increment,
-  decrement,
-  incrementByAmount,
-  addTask,
-  handleCheck,
-  handleEdit,
-  handleAdd,
-  handleDelete,
-} = counterSlice.actions;
+export const { handleCheck, handleEdit, handleAdd, handleDelete } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
